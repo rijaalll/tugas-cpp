@@ -281,6 +281,15 @@ public:
         cout << "----------------------------------------" << endl;
     }
 
+    // === FUNGSI REKURSIF UNTUK TAMPILKAN BARANG ===
+    void tampilkanBarangRekursif(Barang* barang) {
+        if (barang == nullptr) return;
+        cout << barang->id << "\t" << barang->nama << "\t\t\t"
+             << barang->jumlah << "\t" << barang->harga << "\t\t"
+             << barang->kategori << endl;
+        tampilkanBarangRekursif(barang->next);
+    }
+
     void tampilkanSemuaBarang() {
         if (head == nullptr) {
             cout << "\nGudang kosong! Tidak ada barang." << endl;
@@ -290,36 +299,32 @@ public:
         cout << "\n=== DAFTAR SEMUA BARANG ===" << endl;
         cout << "ID\tNama\t\t\tJumlah\tHarga\t\tKategori" << endl;
         cout << "----------------------------------------------------------------" << endl;
+        tampilkanBarangRekursif(head);
+    }
 
-        Barang* current = head;
-        while (current != nullptr) {
-            cout << current->id << "\t" << current->nama << "\t\t\t"
-                 << current->jumlah << "\t" << current->harga << "\t\t"
-                 << current->kategori << endl;
-            current = current->next;
-        }
+    // === FUNGSI REKURSIF UNTUK HITUNG STATISTIK ===
+    void hitungStatistikRekursif(Barang* barang, int& jenis, int& totalJumlah, double& totalNilai) {
+        if (barang == nullptr) return;
+
+        jenis++;
+        totalJumlah += barang->jumlah;
+        totalNilai += barang->jumlah * barang->harga;
+
+        hitungStatistikRekursif(barang->next, jenis, totalJumlah, totalNilai);
     }
 
     void hitungTotalNilai() {
-        double totalNilai = 0;
-        int totalBarang = 0;
-        int jenisBarang = 0;
+        int jenisBarang = 0, totalJumlah = 0;
+        double totalNilai = 0.0;
 
-        Barang* current = head;
-        while (current != nullptr) {
-            totalNilai += current->harga * current->jumlah;
-            totalBarang += current->jumlah;
-            jenisBarang++;
-            current = current->next;
-        }
+        hitungStatistikRekursif(head, jenisBarang, totalJumlah, totalNilai);
 
         cout << "\n=== STATISTIK GUDANG ===" << endl;
         cout << "Total Jenis Barang: " << jenisBarang << endl;
-        cout << "Total Jumlah Barang: " << totalBarang << endl;
+        cout << "Total Jumlah Barang: " << totalJumlah << endl;
         cout << "Total Nilai Gudang: Rp " << totalNilai << endl;
     }
 
-    // Fungsi untuk menghapus barang
     void hapusBarang() {
         int id;
         cout << "\n=== HAPUS BARANG ===" << endl;
@@ -331,7 +336,6 @@ public:
             return;
         }
 
-        // Jika barang yang dihapus adalah head
         if (head->id == id) {
             Barang* temp = head;
             head = head->next;
@@ -341,7 +345,6 @@ public:
             return;
         }
 
-        // Mencari barang yang akan dihapus
         Barang* current = head;
         while (current->next != nullptr && current->next->id != id) {
             current = current->next;
@@ -388,30 +391,14 @@ int main() {
         cin >> pilihan;
 
         switch (pilihan) {
-            case 1:
-                gudang->tambahBarang();
-                break;
-            case 2:
-                gudang->tambahStok();
-                break;
-            case 3:
-                gudang->kurangiStok();
-                break;
-            case 4:
-                gudang->tampilkanSemuaBarang();
-                break;
-            case 5:
-                gudang->cariBarang();
-                break;
-            case 6:
-                gudang->sortingBarang();
-                break;
-            case 7:
-                gudang->hitungTotalNilai();
-                break;
-            case 8:
-                gudang->hapusBarang();
-                break;
+            case 1: gudang->tambahBarang(); break;
+            case 2: gudang->tambahStok(); break;
+            case 3: gudang->kurangiStok(); break;
+            case 4: gudang->tampilkanSemuaBarang(); break;
+            case 5: gudang->cariBarang(); break;
+            case 6: gudang->sortingBarang(); break;
+            case 7: gudang->hitungTotalNilai(); break;
+            case 8: gudang->hapusBarang(); break;
             case 0:
                 cout << "Terima kasih telah menggunakan Sistem Manajemen Gudang!" << endl;
                 break;
