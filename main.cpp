@@ -1,19 +1,27 @@
 #include <iostream>
 #include "Gudang.h"
+#include "Gudang.cpp"
 
 using namespace std;
 
 void tampilkanMenu() {
-    cout << "\n=== MENU MANAJEMEN GUDANG ===\n";
-    cout << "1. Tambah Barang\n";
-    cout << "2. Tambah Stok\n";
-    cout << "3. Kurangi Stok\n";
-    cout << "4. Tampilkan Semua\n";
-    cout << "5. Cari Barang\n";
-    cout << "6. Sorting\n";
-    cout << "7. Statistik\n";
-    cout << "8. Hapus Barang\n";
-    cout << "0. Keluar\n";
+
+    cout << endl;
+    cout << "====================================" << endl;
+    cout << "===== MENU MANAJEMEN GUDANG ========" << endl;
+    cout << "==== MOHAMMAD RIZAL AJI PERMANA ====" << endl; 
+    cout << "===== FANZA ADHITYA PRAMADANU ======" << endl; 
+    cout << "====================================" << endl;
+    cout << endl;
+    cout << "1. Tambah Barang" << endl;
+    cout << "2. Tambah Stok" << endl;
+    cout << "3. Kurangi Stok" << endl;
+    cout << "4. Tampilkan Semua" << endl;
+    cout << "5. Cari Barang" << endl;
+    cout << "6. Sorting" << endl;
+    cout << "7. Statistik" << endl;
+    cout << "8. Hapus Barang" << endl;
+    cout << "0. Keluar" << endl;
     cout << "Pilih: ";
 }
 
